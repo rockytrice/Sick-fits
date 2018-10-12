@@ -1,6 +1,10 @@
 import Link from "next/link";
+import NavStyles from "./styles/NavStyles";
+
+
+
 const Nav = () => (
-   <div>
+   <NavStyles>
        {/* This is client-side navigation; the action takes place in the browser, without making a request to the server. */}  
     <Link href="/">
         <a>Home</a>
@@ -8,7 +12,7 @@ const Nav = () => (
     <Link href="/Sell">
         <a>Sell</a>
     </Link> 
-   </div> 
+   </NavStyles> 
 )
 
 export default Nav;
