@@ -1,9 +1,11 @@
+# public facing API (this is what we will be interfacing with. with our javascript!! )
 
+# import * from './generated/prisma.graphql'
 
 type Mutation {
-    hi: String
+    createItem(title: String, description: String, Price: Int, image: String, LargeImage: String): Item!
 }
 
 type Query {
-    hi: String
+    Items: [Item]!
 }

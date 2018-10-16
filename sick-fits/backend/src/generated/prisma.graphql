@@ -1,6 +1,9 @@
 # source: https://us1.prisma.sh/wesbos/sick-fits/dev
 # timestamp: Fri May 25 2018 10:46:45 GMT-0400 (EDT)
 
+
+# this file is generated based off of the datamodel.graphql file
+
 type AggregateCartItem {
   count: Int!
 }
