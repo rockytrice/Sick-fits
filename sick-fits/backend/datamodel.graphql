@@ -1,4 +1,6 @@
 # this graphql file is for prisma our backend
+
+# note!! anytime you make a change to what your data model looks like, you must deploy to prisma because you need to update the database to know and expect both items as well as pull down new prisma schema.
 type User {
   id: ID! @unique
   name: String!

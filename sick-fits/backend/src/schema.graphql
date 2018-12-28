@@ -1,4 +1,8 @@
+# note!!this graphql file is for prisma (our backend)
+
 # public facing API (this is what we will be interfacing with. with our javascript!! )
+
+# the comment below is a prisma GraphQL import. it does it via a comment.
 
 # import * from './generated/prisma.graphql'
 
@@ -7,5 +11,5 @@ type Mutation {
 }
 
 type Query {
-    Items: [Item]!
+    items: [Item]!
 }
