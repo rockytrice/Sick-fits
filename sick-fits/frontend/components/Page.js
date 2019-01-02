@@ -54,15 +54,16 @@ body {
 }
 a {
   text-decoration: none;
-  color: ${theme.black};
+  color: ${theme.black}
 }
 `;
+
 
 
 export default class Page extends Component {
   render() {
     return (
-      // allows you to specify values up high and any child can access those values via react context API
+      // allows you to specify values up high and any child can access those values via react context API  
       <ThemeProvider theme={theme}>
         <StyledPage>
           <Meta />
@@ -76,4 +77,3 @@ export default class Page extends Component {
     )
   }
 }
-
