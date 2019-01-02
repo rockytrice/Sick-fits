@@ -7,7 +7,7 @@ const Nav = () => (
    <NavStyles>
        {/* This is client-side navigation; the action takes place in the browser, without making a request to the server. */}  
         <Link href="/items">
-        <a>Item</a>
+        <a>Shop</a>
         </Link>
         <Link href="/Sell">       
          <a>Sell</a>
