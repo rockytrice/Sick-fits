@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
+import Item from './Item';
 
 // best practice to put all of your queries in caps. Works exactly like styled components as so we write our queries in a string and you tag in using "gql" inside of back tics!!
 const ALL_ITEMS_QUERY = gql `
@@ -49,7 +50,8 @@ const ItemsList = styled.div`
                 return <p>Error: {error.message}</p>
               }
               return <ItemsList>
-                {data.items.map( item=> <p>{item.title}</p>)}
+              {/* note.. anytime you are looping over and spitting out multiple elements as siblings and they are the same component you must also give it a key prop!!  */}
+                {data.items.map( item => <Item item={item} key={item.id} />)}
             </ItemsList>
           }}
         </Query>
