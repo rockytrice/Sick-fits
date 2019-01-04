@@ -44,6 +44,15 @@ import FormatMoney from "../lib/formatMoney";
               />
               
           </label>
+          <label htmlFor="description">
+              Description
+              <textarea  id="description" name="description"
+              placeholder="Enter a description" required 
+              value = {this.state.description}
+              onChange={this.handleChange}
+              />
+          </label>
+          <button type="submit">Submit</button>
         </fieldset>
       </Form>
     )
