@@ -19,7 +19,8 @@ import FormatMoney from "../lib/formatMoney";
          const val= type === "number" ? parseFloat(value) :
          value;
          console.log({name, type, value});
-       this.setState({title: e.target.value});         
+        //  modified the setState to work for any input using computed property names and it will mirror that change to state
+       this.setState({[name]: val});         
      }
   render() {
     return (
@@ -30,6 +31,15 @@ import FormatMoney from "../lib/formatMoney";
               <input type="text" id="title" name="title"
               placeholder="Title" required 
               value = {this.state.title}
+              onChange={this.handleChange}
+              />
+              
+          </label>
+          <label htmlFor="price">
+              Price 
+              <input type="number" id="price" name="price"
+              placeholder="Price" required 
+              value = {this.state.price}
               onChange={this.handleChange}
               />
               
