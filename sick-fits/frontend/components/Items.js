@@ -61,3 +61,4 @@ const ItemsList = styled.div`
 }
 
 export default Items;
+export { ALL_ITEMS_QUERY };

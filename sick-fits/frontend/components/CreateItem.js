@@ -2,6 +2,28 @@ import React, { Component } from 'react';
 import { Mutation } from "react-apollo";
 import Form from "./styles/Form";
 import FormatMoney from "../lib/formatMoney";
+import gql from "graphql-tag";
+
+// query thats going to submit the data. so this is sort of like a function that is going to take in these variables and when it is called its going to run createItem which we specified in our schema on the back in and use the passed in variables that we noted with the $. Once it has been created all we want back is the Item's id.
+const CREATE_ITEM_MUTATUION = gql`
+    mutation CREATE_ITEM_MUTATUION(
+        $title: String!
+        $price: Int!
+        $description: String!
+        $image: String
+        $largeImage: String
+    ) {
+        CreateItem(
+        title: $title
+        price: $price
+        description: $description
+        image: $image
+        largeImage: $largeImage
+        ) {
+            id
+        }
+    }
+`;
 
  class CreateItem extends Component {
      state= {
@@ -64,3 +86,4 @@ import FormatMoney from "../lib/formatMoney";
 }
 
 export default CreateItem;
+export  { CREATE_ITEM_MUTATUION };
