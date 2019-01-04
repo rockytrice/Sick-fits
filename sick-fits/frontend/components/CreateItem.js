@@ -18,13 +18,17 @@ import FormatMoney from "../lib/formatMoney";
         //  if this is a number we need to make sure its a proper number because any text that comes out of an input, even if its a type of number it will still out it as a string so we need to coerce it to a proper number
          const val= type === "number" ? parseFloat(value) :
          value;
-         console.log({name, type, value});
+        //  console.log({name, type, value});
         //  modified the setState to work for any input using computed property names and it will mirror that change to state
        this.setState({[name]: val});         
      }
   render() {
     return (
-      <Form>
+        // listening for the submit event and pushing it up to the server.
+      <Form onSubmit ={(e) => {
+          e.preventDefault();
+          console.log(this.state);
+      }} >
         <fieldset>
           <label htmlFor="title">
               Title 
