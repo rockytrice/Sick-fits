@@ -11,13 +11,12 @@ const server = createServer();
 // TODOS use express middleware to handle cookies (JWT)
 // TODOS use express middleware to populate current user
 
-server.start(
-  { 
-    cors: {
-        credentials: true,
-        orgin: process.env.FRONTEND_URL,
+server.start({
+        cors: {
+            credentials: true,
+            origin: process.env.FRONTEND_URL,
+        },
     },
-  },
     deets => {
         console.log(`Server is now running on http://localhost:${deets.port}`);
     }

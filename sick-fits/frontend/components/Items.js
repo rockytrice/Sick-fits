@@ -36,9 +36,8 @@ class Items extends Component {
     return (
       <Center>
         <Query query={ALL_ITEMS_QUERY}>
-          {" "}
           {/* the only child of a query component is going to  be a function. this will give you either loading state, error or the actual list of items it self.  */}
-          {/* destructurng the values out of payload that i wanted into variables  */}{" "}
+          {/* destructurng the values out of payload that i wanted into variables  */}
           {({ data, error, loading }) => {
             console.log(data);
             if (loading) {
@@ -49,15 +48,14 @@ class Items extends Component {
             }
             return (
               <ItemsList>
-                {" "}
-                {/* note.. anytime you are looping over and spitting out multiple elements as siblings and they are the same component you must also give it a key prop!!  */}{" "}
+                {/* note.. anytime you are looping over and spitting out multiple elements as siblings and they are the same component you must also give it a key prop!!  */}
                 {data.items.map(item => (
                   <Item item={item} key={item.id} />
-                ))}{" "}
+                ))}
               </ItemsList>
             );
-          }}{" "}
-        </Query>{" "}
+          }}
+        </Query>
       </Center>
     );
   }

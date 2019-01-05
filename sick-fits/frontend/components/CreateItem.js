@@ -14,7 +14,7 @@ const CREATE_ITEM_MUTATUION = gql`
     $image: String
     $largeImage: String
   ) {
-    CreateItem(
+    createItem(
       title: $title
       price: $price
       description: $description
@@ -49,12 +49,13 @@ class CreateItem extends Component {
       //    exposing the create_item_mutation function.. wrap the entire form tag in a mutation component. so when this mutatuion fires, its going to take a copy of this.state and send all of those values for the ride.
       <Mutation mutation={CREATE_ITEM_MUTATUION} variables={this.state}>
         {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutationfunction(createItem) and the payload. then we return everything from below ⬇️ 😰 */}
-        {(CreateItem, { loading, error }) => (
+        {(createItem, { loading, error }) => (
           <Form
-            onSubmit={e => {
+            onSubmit={async e => {
               // listening for the submit event and pushing it up to the server.
               e.preventDefault();
-              console.log(this.state);
+              const res = await createItem();
+              console.log(res);
             }}
           >
             <Error error={error} />
