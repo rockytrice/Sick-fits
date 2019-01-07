@@ -16,6 +16,25 @@ const Mutations = {
         }, info);
         console.log(item);
         return item;
+    },
+    updateItem(parent, args, ctx, info) {
+        // first take a copy of the updates
+        const updates = {...args};
+        // remove the ID from the updates
+        delete updates.id;
+        // run the update method
+        // context is the context in the request.db is how we expose the actual prisma database to ourself. On top of that is a query or mutation and then we have access to all of the mutations that are in the generate prsima.gql file.
+        // since we are returning this promise based function it will wait for that update to pass
+        return ctx.db.mutation.updateItem(
+          {
+            data:updates,
+            where: {
+            id:args.id,
+            },
+          },
+        // 2nd arg and how the update item function above knows what to retrun 
+          info
+        );
     }
 }
 module.exports = Mutations;
