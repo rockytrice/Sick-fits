@@ -8,8 +8,12 @@
 
 type Mutation {
     createItem(title: String, description: String, price: Int, image: String, largeImage: String): Item!
+    # figure out how to update image flow!!
+    updateItem(id: ID!, title: String, description: String, prince:Int):item!
 }
 
 type Query {
     items: [Item]!
+    # comes from the prisma.graphql file
+    item(where: ItemWhereUniqueInput!): Item`
 }
