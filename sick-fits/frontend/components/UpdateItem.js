@@ -6,6 +6,18 @@ import FormatMoney from "../lib/formatMoney";
 import gql from "graphql-tag";
 import Error from "./ErrorMessage";
 
+// this is where we get access to the item it self. all we know is the  db's id and we need to pull that from the db in order to populate the item so the user can see what they are editing
+const SINGLE_ITEM_QUERY = gql`
+query SINGLE_ITEM_QUERY($id. ID!) {
+  item(where: {id: $id }) {
+    id
+    title
+    description
+    price
+  }
+}
+`;
+
 // query thats going to submit the data. so this is sort of like a function that is going to take in these variables and when it is called its going to run createItem which we specified in our schema on the back in and use the passed in variables that we noted with the $. Once it has been created all we want back is the Item's id.
 const UPDATE_ITEM_MUTATUION = gql`
   mutation UPDATE_ITEM_MUTATUION(
