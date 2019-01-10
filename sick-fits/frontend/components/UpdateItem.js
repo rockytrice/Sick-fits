@@ -6,21 +6,9 @@ import FormatMoney from "../lib/formatMoney";
 import gql from "graphql-tag";
 import Error from "./ErrorMessage";
 
-// this is where we get access to the item it self. all we know is the  db's id and we need to pull that from the db in order to populate the item so the user can see what they are editing
-const SINGLE_ITEM_QUERY = gql`
-query SINGLE_ITEM_QUERY($id. ID!) {
-  item(where: {id: $id }) {
-    id
-    title
-    description
-    price
-  }
-}
-`;
-
 // query thats going to submit the data. so this is sort of like a function that is going to take in these variables and when it is called its going to run createItem which we specified in our schema on the back in and use the passed in variables that we noted with the $. Once it has been created all we want back is the Item's id.
-const UPDATE_ITEM_MUTATUION = gql`
-  mutation UPDATE_ITEM_MUTATUION(
+const UPDATE_ITEM_MUTATION = gql`
+  mutation UPDATE_ITEM_MUTATION(
     $title: String!
     $price: Int!
     $description: String!
@@ -54,7 +42,7 @@ class UpdateItem extends Component {
 
   render() {
     return (
-      //    exposing the create_item_mutation function.. wrap the entire form tag in a mutation component. so when this mutatuion fires, its going to take a copy of this.state and send all of those values for the ride.
+      //    exposing the UPDATE_ITEM_MUTATION function.. wrap the entire form tag in a mutation component. so when this mutatuion fires, its going to take a copy of this.state and send all of those values for the ride.
       <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
         {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutationfunction(createItem) and the payload. then we return everything from below ⬇ 😰 */}
         {(createItem, { loading, error }) => (
@@ -68,7 +56,7 @@ class UpdateItem extends Component {
               console.log(res);
               Router.push({
                 pathname: "/item",
-                query: { id: res.data.createItem.id},
+                query: { id: res.data.createItem.id }
               });
             }}
           >
@@ -120,4 +108,4 @@ class UpdateItem extends Component {
 }
 
 export default UpdateItem;
-export { UPDATE_ITEM_MUTATUION };
+export { UPDATE_ITEM_MUTATION };

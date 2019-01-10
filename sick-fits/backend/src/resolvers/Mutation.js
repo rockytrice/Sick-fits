@@ -1,12 +1,12 @@
 const Mutations = {
     // ctx.db.mutation.createItem returns a promise so if we want the items to go into the item value we have to make this an async method and await the creation of the item inside of there and then return the item.
-    
-   async createItem(parent, args, ctx, info){
+
+    async createItem(parent, args, ctx, info) {
         // TODO check if they are logged in
 
         // here is where we begin to interface with the prisma database
 
-        
+
         const item = await ctx.db.mutation.createItem({
             data: {
                 // spread the args in with (... notation)
@@ -19,21 +19,21 @@ const Mutations = {
     },
     updateItem(parent, args, ctx, info) {
         // first take a copy of the updates
-        const updates = {...args};
-        // remove the ID from the updates
+        const updates = { ...args
+        };
+        // remove the ID from the updates ❌
         delete updates.id;
-        // run the update method
+        // run the update method🏃🏾‍♂️
         // context is the context in the request.db is how we expose the actual prisma database to ourself. On top of that is a query or mutation and then we have access to all of the mutations that are in the generate prsima.gql file.
         // since we are returning this promise based function it will wait for that update to pass
-        return ctx.db.mutation.updateItem(
-          {
-            data:updates,
-            where: {
-            id:args.id,
+        return ctx.db.mutation.updateItem({
+                data: updates,
+                where: {
+                    id: args.id,
+                },
             },
-          },
-        // 2nd arg and how the update item function above knows what to retrun 
-          info
+            // 2nd arg and how the update item function above knows what to return 
+            info
         );
     }
 }

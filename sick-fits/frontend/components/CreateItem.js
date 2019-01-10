@@ -7,8 +7,8 @@ import gql from "graphql-tag";
 import Error from "./ErrorMessage";
 
 // query thats going to submit the data. so this is sort of like a function that is going to take in these variables and when it is called its going to run createItem which we specified in our schema on the back in and use the passed in variables that we noted with the $. Once it has been created all we want back is the Item's id.
-const CREATE_ITEM_MUTATUION = gql`
-  mutation CREATE_ITEM_MUTATUION(
+const CREATE_ITEM_MUTATION = gql`
+  mutation CREATE_ITEM_MUTATION(
     $title: String!
     $price: Int!
     $description: String!
@@ -46,7 +46,7 @@ class CreateItem extends Component {
     this.setState({ [name]: val });
   };
 
-   uploadFile = async (e) => {
+  uploadFile = async e => {
     console.log("uploading file");
     // pull files out of the selection
     const files = e.target.files;
@@ -57,24 +57,27 @@ class CreateItem extends Component {
     // upload preset.. arguement needed by cloudinary
     data.append("upload_preset", "sickfits");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/rocky/image/upload", {
-      method: "POST",
-      body: data
-    });
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/rocky/image/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    );
     // parse data that comes back
     const file = await res.json();
     console.log(file);
-    this.setState ({
+    this.setState({
       image: file.secure_url,
-      // eager is a secondary transform that happens and its going to transform a larger version of that so we don't have to wait for both of the request to come back 
+      // eager is a secondary transform that happens and its going to transform a larger version of that so we don't have to wait for both of the request to come back
       largerImage: file.eager[0].secure_url
-    })
+    });
   };
 
   render() {
     return (
       //    exposing the create_item_mutation function.. wrap the entire form tag in a mutation component. so when this mutatuion fires, its going to take a copy of this.state and send all of those values for the ride.
-      <Mutation mutation={CREATE_ITEM_MUTATUION} variables={this.state}>
+      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutationfunction(createItem) and the payload. then we return everything from below ⬇ 😰 */}
         {(createItem, { loading, error }) => (
           <Form
@@ -87,14 +90,14 @@ class CreateItem extends Component {
               console.log(res);
               Router.push({
                 pathname: "/item",
-                query: { id: res.data.createItem.id},
+                query: { id: res.data.createItem.id }
               });
             }}
           >
             <Error error={error} />
             {/* 👍 adding the loading will stop the user from being able to edit or submit the form again. so if the loading is true then the user will not be able to edit the form. the aria-busy will tell the user if the group of fields is busy or not.Apollo will flip this on and off automatically 😃*/}
             <fieldset disabled={loading} aria-busy={loading}>
-            <label htmlFor="file">
+              <label htmlFor="file">
                 Title
                 <input
                   type="file"
@@ -105,7 +108,9 @@ class CreateItem extends Component {
                   onChange={this.uploadFile}
                 />
                 {/* showing the user a preview of what image was loaded */}
-                {this.state.image && <img src={this.state.image } alt="Upload Preview" />}
+                {this.state.image && (
+                  <img src={this.state.image} alt="Upload Preview" />
+                )}
               </label>
               <label htmlFor="title">
                 Title
@@ -152,4 +157,4 @@ class CreateItem extends Component {
 }
 
 export default CreateItem;
-export { CREATE_ITEM_MUTATUION };
+export { CREATE_ITEM_MUTATION };
