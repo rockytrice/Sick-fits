@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
-export default class DeleteItem extends Component {
+class DeleteItem extends Component {
   render() {
-    return <div />;
+    return <button>{this.props.children}</button>;
   }
 }
+export default DeleteItem;

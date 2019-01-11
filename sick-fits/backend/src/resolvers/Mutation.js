@@ -37,6 +37,15 @@ const Mutations = {
       // 2nd arg and how the update item function above knows what to return
       info
     );
+  },
+  deleteItem(parent, args, ctx, info) {
+    const where = { id: args.id };
+    // find item
+    const item = awaitctx.db.query.item({ where }, `{id title}`);
+    // check if they own that item, or have the permissions
+    // TODO
+    // delete it❌
+    return ctx.db.mutation.deleteItem({ where }, info);
   }
 };
 module.exports = Mutations;

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import Title from "./styles/Title";
 import Itemstyles from "./styles/ItemStyles";
+import DeleteItem from "./DeleteItem";
 import PriceTag from "./styles/PriceTag";
 import formatMoney from "../lib/formatMoney";
 
@@ -48,7 +49,8 @@ export default class Item extends Component {
           >
             <a> Edit✏️ </a>
           </Link>
-          <button> Add To Cart🛒 </button> <button> Delete </button>
+          <button> Add To Cart🛒 </button>
+          <DeleteItem>Delete Item❌</DeleteItem>
         </div>
       </Itemstyles>
     );
