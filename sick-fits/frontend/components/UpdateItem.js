@@ -125,7 +125,10 @@ class UpdateItem extends Component {
                         onChange={this.handleChange}
                       />
                     </label>
-                    <button type="submit">Save Changes</button>
+                    <button type="submit">
+                      {/* loading boolean that will change the word to saving whenever the button is clicked*/}
+                      Sav{loading ? "ing" : "e"} Changes
+                    </button>
                   </fieldset>
                 </Form>
               )}
