@@ -62,7 +62,7 @@ class UpdateItem extends Component {
           id: this.props.id
         }}
       >
-        {/* take the data that was returned from our single item query and put them into the input boxes but not tie it to state directly but show the user what they have and then if they change anything then put it into state!!😎  */}
+        {/* take the data that was returned from our single item query and put them into the input boxes but not tie it to state directly but show the user what they have and then if they change anything then put it into state!!😎   */}
         {({ data, loading }) => {
           if (loading) return <p>Loading...</p>;
           return (
@@ -73,6 +73,8 @@ class UpdateItem extends Component {
                 <Form onSubmit={e => this.updateItem(e, updateItem)}>
                   <Error error={error} />
                   {/* 👍 adding the loading will stop the user from being able to edit or submit the form again. so if the loading is true then the user will not be able to edit the form. the aria-busy will tell the user if the group of fields is busy or not.Apollo will flip this on and off automatically 😃*/}
+
+                  {/* by changing value to defaultValue in react it allows you to set some input box to some text without tying it to state because we are going to be mirroring it to state only when they change it.   */}
                   <fieldset disabled={loading} aria-busy={loading}>
                     <label htmlFor="title">
                       Title
@@ -82,7 +84,7 @@ class UpdateItem extends Component {
                         name="title"
                         placeholder="Title"
                         required
-                        value={this.state.title}
+                        defaultValue={data.item.title}
                         onChange={this.handleChange}
                       />
                     </label>
@@ -94,7 +96,7 @@ class UpdateItem extends Component {
                         name="price"
                         placeholder="Price"
                         required
-                        value={this.state.price}
+                        defaultValue={data.item.price}
                         onChange={this.handleChange}
                       />
                     </label>
