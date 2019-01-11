@@ -54,6 +54,19 @@ class UpdateItem extends Component {
     this.setState({ [name]: val });
   };
 
+  updateItem = async (e, updateItemMutation) => {
+    e.preventDefault();
+    console.log("Updating Item🆕!!");
+    console.log(this.state);
+    const res = await updateItemMutation({
+      variables: {
+        id: this.props.id,
+        ...this.state
+      }
+    });
+    console.log("Updated❗️");
+  };
+
   render() {
     return (
       <Query
@@ -65,10 +78,11 @@ class UpdateItem extends Component {
         {/* take the data that was returned from our single item query and put them into the input boxes but not tie it to state directly but show the user what they have and then if they change anything then put it into state!!😎   */}
         {({ data, loading }) => {
           if (loading) return <p>Loading...</p>;
+          if (!data.item) return <p>No Item Found for ID {this.props.id}</p>;
           return (
             //    exposing the UPDATE_ITEM_MUTATION function.. wrap the entire form tag in a mutation component. so when this mutatuion fires, its going to take a copy of this.state and send all of those values for the ride.
             <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
-              {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutationfunction(createItem) and the payload. then we return everything from below ⬇ 😰 */}
+              {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutationfunction(updateItem) and the payload. then we return everything from below ⬇ 😰 */}
               {(updateItem, { loading, error }) => (
                 <Form onSubmit={e => this.updateItem(e, updateItem)}>
                   <Error error={error} />
@@ -88,7 +102,7 @@ class UpdateItem extends Component {
                         onChange={this.handleChange}
                       />
                     </label>
-                    <label htmlFor="price">
+                    <label htmlFor="Price">
                       Price
                       <input
                         type="number"

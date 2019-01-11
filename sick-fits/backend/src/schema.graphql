@@ -15,7 +15,7 @@ type Mutation {
     largeImage: String
   ): Item!
   # figure out how to update image flow later!
-  updateItem(id: ID!, title: String, description: String, prince: Int): Item!
+  updateItem(id: ID!, title: String, description: String, price: Int): Item!
 }
 
 type Query {
