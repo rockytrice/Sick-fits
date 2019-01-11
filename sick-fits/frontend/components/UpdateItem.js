@@ -1,40 +1,42 @@
 import React, { Component } from "react";
 import { Mutation, Query } from "react-apollo";
+import gql from "graphql-tag";
 import Router from "next/router";
 import Form from "./styles/Form";
-import FormatMoney from "../lib/formatMoney";
-import gql from "graphql-tag";
+import formatMoney from "../lib/formatMoney";
 import Error from "./ErrorMessage";
 
 // this is where we get access to the item it self. all we know is the  db's id and we need to pull that from the db in order to populate the item so the user can see what they are editing
 const SINGLE_ITEM_QUERY = gql`
-query SINGLE_ITEM_QUERY($id. ID!) {
-  item(where: {id: $id }) {
-    id
-    title
-    description
-    price
+  query SINGLE_ITEM_QUERY($id: ID!) {
+    item(where: { id: $id }) {
+      id
+      title
+      description
+      price
+    }
   }
-}
 `;
 
 // query thats going to submit the data. so this is sort of like a function that is going to take in these variables and when it is called its going to run createItem which we specified in our schema on the back in and use the passed in variables that we noted with the $. Once it has been created all we want back is the Item's id.
+
 const UPDATE_ITEM_MUTATION = gql`
   mutation UPDATE_ITEM_MUTATION(
-    $title: String!
-    $price: Int!
-    $description: String!
-    $image: String
-    $largeImage: String
+    $id: ID!
+    $title: String
+    $description: String
+    $price: Int
   ) {
-    createItem(
+    updateItem(
+      id: $id
       title: $title
-      price: $price
       description: $description
-      image: $image
-      largeImage: $largeImage
+      price: $price
     ) {
       id
+      title
+      description
+      price
     }
   }
 `;
@@ -62,25 +64,13 @@ class UpdateItem extends Component {
       >
         {/* take the data that was returned from our single item query and put them into the input boxes but not tie it to state directly but show the user what they have and then if they change anything then put it into state!!😎  */}
         {({ data, loading }) => {
+          if (loading) return <p>Loading...</p>;
           return (
             //    exposing the UPDATE_ITEM_MUTATION function.. wrap the entire form tag in a mutation component. so when this mutatuion fires, its going to take a copy of this.state and send all of those values for the ride.
             <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
               {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutationfunction(createItem) and the payload. then we return everything from below ⬇ 😰 */}
-              {(createItem, { loading, error }) => (
-                <Form
-                  onSubmit={async e => {
-                    // stop form for submitting..listen for the submit event and push it up to the server.
-                    e.preventDefault();
-                    // call the mutation
-                    const res = await createItem();
-                    // change them to the single item page
-                    console.log(res);
-                    Router.push({
-                      pathname: "/item",
-                      query: { id: res.data.createItem.id }
-                    });
-                  }}
-                >
+              {(updateItem, { loading, error }) => (
+                <Form onSubmit={e => this.updateItem(e, updateItem)}>
                   <Error error={error} />
                   {/* 👍 adding the loading will stop the user from being able to edit or submit the form again. so if the loading is true then the user will not be able to edit the form. the aria-busy will tell the user if the group of fields is busy or not.Apollo will flip this on and off automatically 😃*/}
                   <fieldset disabled={loading} aria-busy={loading}>
