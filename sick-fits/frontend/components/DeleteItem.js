@@ -12,6 +12,11 @@ const DELETE_ITEM_MUTATION = gql`
 `;
 
 class DeleteItem extends Component {
+  update = (cache, { data: { deleteItem } }) => {
+    // first we read the cache for what items we want. This query below ⬇️ give's us access to all items on the page.
+    const { items } = cache.readQuery({ query: ALL_ITEMS_QUERY });
+    console.log(items, deleteItem);
+  };
   // this seems to not work🤔
   //   update = (cache, payload) => {
   //     // steps to manually update the cache on the client so it matches the server.
