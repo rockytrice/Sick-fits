@@ -70,7 +70,7 @@ class CreateItem extends Component {
     this.setState({
       image: file.secure_url,
       // eager is a secondary transform that happens and its going to transform a larger version of that so we don't have to wait for both of the request to come back
-      largerImage: file.eager[0].secure_url
+      largeImage: file.eager[0].secure_url
     });
   };
 
