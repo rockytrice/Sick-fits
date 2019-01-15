@@ -47,7 +47,7 @@ class CreateItem extends Component {
   };
 
   uploadFile = async e => {
-    console.log("uploading file");
+    console.log("uploading file🔄");
     // pull files out of the selection
     const files = e.target.files;
     // form data api which will prep all of the data
