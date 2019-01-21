@@ -23,4 +23,5 @@ type Query {
   items: [Item]!
   # comes from the prisma.graphql file
   item(where: ItemWhereUniqueInput!): Item
+  itemsConnection(where: ItemWhereInput): ItemConnection!
 }

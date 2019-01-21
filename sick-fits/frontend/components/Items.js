@@ -3,6 +3,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Item from "./Item";
+import Pagination from "./Pagination";
 
 // best practice to put all of your queries in caps. Works exactly like styled components as so we write our queries in a string and you tag in using "gql" inside of back tics!!
 const ALL_ITEMS_QUERY = gql`
@@ -35,6 +36,7 @@ class Items extends Component {
   render() {
     return (
       <Center>
+        <Pagination />
         <Query query={ALL_ITEMS_QUERY}>
           {/* the only child of a query component is going to  be a function. this will give you either loading state, error or the actual list of items it self.  */}
           {/* destructurng the values out of payload that i wanted into variables  */}
@@ -56,6 +58,7 @@ class Items extends Component {
             );
           }}
         </Query>
+        <Pagination />
       </Center>
     );
   }
