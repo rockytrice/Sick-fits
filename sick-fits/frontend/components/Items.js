@@ -36,7 +36,7 @@ class Items extends Component {
   render() {
     return (
       <Center>
-        <Pagination />
+        <Pagination page={this.props.page} />
         <Query query={ALL_ITEMS_QUERY}>
           {/* the only child of a query component is going to  be a function. this will give you either loading state, error or the actual list of items it self.  */}
           {/* destructurng the values out of payload that i wanted into variables  */}
@@ -58,7 +58,7 @@ class Items extends Component {
             );
           }}
         </Query>
-        <Pagination />
+        <Pagination page={this.props.page} />
       </Center>
     );
   }
