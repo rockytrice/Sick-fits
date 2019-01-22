@@ -20,7 +20,13 @@ type Mutation {
 }
 
 type Query {
-  items: [Item]!
+  # modified items query to search, order them by most recent or least recent etc., the skip and first are going to say i want to skip the first 4 items but i want to bring back 4 items in total which will bring back 5-8.🤞🏾
+  items(
+    where: ItemWhereInput
+    orderBy: ItemOrderByInput
+    skip: Int
+    first: Int
+  ): [Item]!
   # comes from the prisma.graphql file
   item(where: ItemWhereUniqueInput!): Item
   itemsConnection(where: ItemWhereInput): ItemConnection!
