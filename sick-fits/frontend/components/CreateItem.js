@@ -78,7 +78,7 @@ class CreateItem extends Component {
     return (
       //    exposing the create_item_mutation function.. wrap the entire form tag in a mutation component. so when this mutatuion fires, its going to take a copy of this.state and send all of those values for the ride.
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
-        {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutationfunction(createItem) and the payload. then we return everything from below ⬇ 😰 */}
+        {/* just like query, the only child of a mutation or a query can be an actul function. Instead of taking a payload, it gives us the mutation function(createItem) and the payload. then we return everything from below ⬇ 😰 */}
         {(createItem, { loading, error }) => (
           <Form
             onSubmit={async e => {
