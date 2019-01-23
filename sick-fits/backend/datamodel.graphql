@@ -1,10 +1,25 @@
 # this graphql file is for prisma our backend
 
 # note!! anytime you make a change to what your data model looks like, you must deploy to prisma because you need to update the database to know and expect both items as well as pull down new prisma schema.
+
+# this enum permission is very helpful in graphql if you want to have a preset list of possible options for a type❗️
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
+}
+
 type User {
   id: ID! @unique
   name: String!
-  email: String!
+  email: String! @unique
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission]
 }
 
 type Item {

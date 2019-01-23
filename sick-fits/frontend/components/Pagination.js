@@ -57,7 +57,7 @@ const Pagination = props => (
             }}
           >
             {/* disables the next link on the last page */}
-            <a className="Next" aria-disabled={page >= 3}>
+            <a className="Next" aria-disabled={page >= pages}>
               Next ➡️
             </a>
           </Link>
