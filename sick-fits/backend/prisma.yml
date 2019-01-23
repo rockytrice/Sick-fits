@@ -1,7 +1,6 @@
 endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.graphql
-# secret: ${env:PRISMA_SECRET}
+secret: ${env:PRISMA_SECRET}
 # post deploy hook
-hooks:  
-  post-deploy:
-      -graph get-schema -p prisma
+hooks:
+  post-deploy: -graph get-schema -p prisma

@@ -1,3 +1,4 @@
+const cookieParser = require('cookie-parser');
 // start up node servers
 require("dotenv").config({
     path: "variables.env"
@@ -8,7 +9,8 @@ const db = require("./db");
 // spin up version of the server
 const server = createServer();
 
-// TODOS use express middleware to handle cookies (JWT)
+// this will allow us to access all of the cookies in a formatted object👍🏾
+server.express.use(cookieParser());
 // TODOS use express middleware to populate current user
 
 server.start({
